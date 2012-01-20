@@ -8,7 +8,9 @@
 <div class="interfaceBox">
 	<h1><?php
 			if (userIsAllowed('Actions')) {
-				echo '<a class="add button" href="'.BASE_URL.'/actions/updateAction.php">Add</a>';
+				echo $this->template->linkButton(
+					'Add',BASE_URL.'/actions/updateAction.php','add','icon'
+				);
 			}
 		?>
 		Actions
@@ -26,12 +28,11 @@
 			foreach (ActionList::getActions() as $action) {
 				$editButton = '';
 				if (userIsAllowed('Actions')) {
-					$editButton = "
-					<a class=\"edit button\"
-						href=\"".BASE_URL."/actions/updateAction.php?action_id={$action->getId()}\">
-						Edit
-					</a>
-					";
+					$editButton = $this->template->linkButton(
+						'Edit',
+						BASE_URL."/actions/updateAction.php?action_id={$action->getId()}",
+						'edit'
+					);
 				}
 				$name = View::escape($action->getName());
 				$description = View::escape($action->getDescription());

@@ -8,20 +8,18 @@
 $editButton = '';
 $deleteButton = '';
 if (userIsAllowed('Departments')) {
-	$editButton = "
-	<a class=\"edit button\"
-		href=\"".BASE_URL."/departments/updateDepartment.php?department_id={$this->department->getId()}\">
-		Edit
-	</a>
-	";
+	$editButton = $this->template->linkButton(
+		'Edit',
+		BASE_URL."/departments/updateDepartment.php?department_id={$this->department->getId()}",
+		'edit'
+	);
 	// Departments should only be deleted when there's no people in them
 	if (!count($this->department->getPeople())) {
-		$deleteButton = "
-		<a class=\"delete button\"
-			href=\"".BASE_URL."/departments/deleteDepartment.php?department_id={$this->department->getId()}\">
-			Delete
-		</a>
-		";
+		$deleteButton = $this->template->linkButton(
+			'Delete',
+			BASE_URL."/departments/deleteDepartment.php?department_id={$this->department->getId()}",
+			'delete'
+		);
 	}
 }
 $name = View::escape($this->department->getName());

@@ -17,7 +17,9 @@
 			echo '<p>No results found</p>';
 		}
 		if (userIsAllowed('People')) {
-			echo '<a class="add button" href="'.BASE_URL.'/people/updatePerson.php">Add a Person</a>';
+			echo $this->linkButton(
+				'Add a Person',BASE_URL.'/people/updatePerson.php','add',null,null,'button'
+			);
 		}
 	?>
 </div>

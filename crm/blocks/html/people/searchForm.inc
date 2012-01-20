@@ -47,7 +47,11 @@ if (!isset($_GET['setOfPeople'])) {
 				}
 			?>
 			</table>
-			<button type="submit" class="search">Search</button>
+			<?php
+				echo $this->template->formButton(
+					'Search','submit','search'
+				);
+			?>
 		</fieldset>
 	</form>
 </div>

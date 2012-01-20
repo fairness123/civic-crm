@@ -65,14 +65,21 @@ if ($params) {
 		if (isset($p['value'])) {
 			$url = new URL($_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
 			unset($url->parameters[$key]);
-			echo "<a class=\"delete button\" href=\"$url\">".View::escape("$displayName: {$p['value']['displayName']}")."</a>";
-
+			echo $this->linkButton(
+				View::escape("$displayName: {$p['value']['displayName']}"),
+				$url,
+				'delete'
+			);
 		}
 		else {
 			foreach ($p['values'] as $i=>$v) {
 				$url = new URL($_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
 				unset($url->parameters[$key][$i]);
-				echo "<a class=\"delete button\" href=\"$url\">".View::escape("$displayName: $v[displayName]")."</a>";
+				echo $this->linkButton(
+					View::escape("$displayName: $v[displayName]"),
+					$url,
+					'delete'
+				);
 			}
 		}
 	}

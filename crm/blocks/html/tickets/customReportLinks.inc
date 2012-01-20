@@ -43,8 +43,10 @@
 						}
 					}
 				}
+				echo $this->template->formButton(
+					'Display','submit','search'
+				);
 			?>
-			<button type="submit" class="search">Display</button>
 		</fieldset>
 	</form>
 </div>

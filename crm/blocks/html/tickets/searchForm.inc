@@ -16,7 +16,11 @@
 				<form method=\"get\" action=\"".BASE_URL."/tickets/home.php\">
 					<fieldset>
 						<label>Case # <input name=\"number\" value=\"$number\"/></label>
-						<button type=\"submit\" class=\"search\">Search</button>
+			";
+						echo $this->template->formButton(
+							'Search','submit','search'
+						);
+			echo "
 					</fieldset>
 				</form>
 				<ul><li><a href=\"".BASE_URL."/tickets/home.php?status=open\">
@@ -169,44 +173,7 @@
 							</table>
 						</td>
 					</tr>
-					<tr><td><label for="client_id">Client</label></td></tr>
-					<tr><td><select name="client_id" id="client_id">
-								<option></option>
-								<?php
-									$clients = new ClientList();
-									$clients->find();
-									foreach ($clients as $client) {
-										$selected = (isset($_GET['client_id']) && $_GET['client_id']=="{$client->getId()}")
-											? 'selected="selected"'
-											: '';
-										$name = View::escape($client->getName());
-										echo "<option value=\"{$client->getId()}\">$name</option>";
-									}
-								?>
-							</select>
-						</td>
-					</tr>
 				</table>
-			</fieldset>
-
-			<fieldset><legend>Labels</legend>
-				<ul>
-				<?php
-					foreach (Lookups::get('labels') as $label) {
-						$checked = (isset($_GET['labels']) && in_array($label,$_GET['labels']))
-							? 'checked="checked"'
-							: '';
-						$label = View::escape($label);
-						echo "
-						<li><label>
-								<input name=\"labels[]\" type=\"checkbox\" value=\"$label\" $checked />
-								$label
-							</label>
-						</li>
-						";
-					}
-				?>
-				</ul>
 			</fieldset>
 
 			<fieldset><legend>Fields to display</legend>
@@ -241,9 +208,15 @@
 						$report = View::escape($_GET['report']);
 						echo "<input name=\"report\" type=\"hidden\" value=\"$report\" />";
 					}
+					echo $this->template->formButton(
+						'Search','submit','search'
+					);
 				?>
-				<button type="submit" class="search">Search</button>
 			</fieldset>
 		</form>
 	</div>
 </div>
+<?php
+	#$this->template->addToAsset('scripts',YUI.'/yui/yui-min.js');
+	#$this->template->addToAsset('scripts',BASE_URL.'/js/tickets/search.js');
+?>

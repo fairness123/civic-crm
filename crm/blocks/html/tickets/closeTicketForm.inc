@@ -28,11 +28,12 @@
 					<td><textarea id="notes" name="notes" rows="3" cols="50"></textarea></td>
 				</tr>
 			</table>
-			<button type="submit" class="submit">Submit</button>
-			<button type="button" class="cancel"
-				onclick="document.location.href='<?php echo $this->ticket->getURL(); ?>';">
-				Cancel
-			</button>
+			<?php
+				echo $this->template->formButton('Submit','submit','submit');
+				echo $this->template->formButton(
+					'Cancel','button','cancel',null,"document.location.href='{$this->ticket->getURL()}';"
+				);
+			?>
 		</fieldset>
 	</form>
 </div>

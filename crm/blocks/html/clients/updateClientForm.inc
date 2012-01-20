@@ -37,11 +37,12 @@ $title = $this->client->getId() ? 'Edit Client' : 'Add Client';
 			</table>
 		</fieldset>
 		<fieldset>
-			<button type="submit" class="submit">Submit</button>
-			<button type="button" class="cancel"
-				onclick="document.location.href='<?php echo BASE_URL; ?>/clients';">
-				Cancel
-			</button>
+		<?php
+			echo $this->template->formButton('Submit','submit','submit');
+			echo $this->template->formButton(
+				'Cancel','button','cancel',null,"document.location.href='".BASE_URL."/clients';"
+			);
+		?>
 		</fieldset>
 	</form>
 </div>

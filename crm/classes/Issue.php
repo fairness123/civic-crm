@@ -11,6 +11,15 @@
  */
 class Issue extends MongoRecord
 {
+	public static $types = array(
+		'Request','Complaint','Violation','Police Report',
+		'Public Report','Comment','Question','Staff Report'
+	);
+
+	public static $contactMethods = array(
+		'Phone','Email','Letter','Mayor Email','Constituent Meeting','Walk In','Web Form'
+	);
+
 	/**
 	 * Populates the object with data
 	 *
@@ -217,37 +226,6 @@ class Issue extends MongoRecord
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getLabels()
-	{
-		if (isset($this->data['labels'])) {
-			return $this->data['labels'];
-		}
-		return array();
-	}
-
-	/**
-	 * @param array $labels
-	 */
-	public function setLabels($labels)
-	{
-		array_walk($labels, function($value,$key) use(&$labels) {
-			$labels[$key] = trim($value);
-		});
-		$this->data['labels'] = $labels;
-	}
-
-	/**
-	 * @param string $label
-	 * @return bool
-	 */
-	public function hasLabel($label)
-	{
-		return in_array($label,$this->getLabels());
-	}
-
-	/**
 	 * @return array
 	 */
 	public function getHistory()
@@ -314,12 +292,9 @@ class Issue extends MongoRecord
 	 */
 	public function set($post)
 	{
-		if (!isset($post['labels'])) {
-			$post['labels'] = array();
-		}
 		$fields = array(
 			'type','reportedByPerson','contactMethod','responseMethod','description',
-			'customFields','labels'
+			'customFields'
 		);
 		foreach ($fields as $field) {
 			$set = 'set'.ucfirst($field);

@@ -9,7 +9,9 @@
 				<td><input type="password" name="password" id="password" /></td>
 			</tr>
 		</table>
-		<button type="submit" class="login">Login</button>
+		<?php
+			echo $this->formButton('Login','submit','login');
+		?>
 	</fieldset>
 </form>
 <script type="text/javascript">

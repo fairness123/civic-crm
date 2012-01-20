@@ -9,7 +9,9 @@
 <div class="resolutionList">
 	<h1><?php
 			if (userIsAllowed('Resolutions')) {
-				echo '<a class="add button" href="'.BASE_URL.'/resolutions/updateResolution.php">Add</a>';
+				echo $this->template->linkButton(
+					'Add',BASE_URL.'/resolutions/updateResolution.php','add'
+				);
 			}
 		?>
 		Resolutions
@@ -19,12 +21,11 @@
 			foreach ($this->resolutionList as $resolution) {
 				$editButton = '';
 				if (userIsAllowed('Resolutions')) {
-					$editButton = "
-					<a class=\"edit button\"
-						href=\"".BASE_URL."/resolutions/updateResolution.php?resolution_id={$resolution->getId()}\">
-						Edit
-					</a>
-					";
+					$editButton = $this->template->linkButton(
+						'Edit',
+						BASE_URL."/resolutions/updateResolution.php?resolution_id={$resolution->getId()}",
+						'edit'
+					);
 				}
 				$name = View::escape($resolution->getName());
 				$description = View::escape($resolution->getDescription());

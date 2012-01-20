@@ -12,26 +12,23 @@ $editButton = '';
 $deleteButton = '';
 $responseButton = '';
 if (!$this->disableButtons && userIsAllowed('Issues')) {
-	$editButton = "
-	<a class=\"edit button\"
-		href=\"".BASE_URL."/tickets/updateIssue.php?ticket_id={$this->ticket->getId()};index={$this->index}\">
-		Edit Issue
-	</a>
-	";
-	$deleteButton = "
-	<a class=\"delete button\"
-		href=\"".BASE_URL."/tickets/deleteIssue.php?ticket_id={$this->ticket->getId()};index={$this->index}\">
-		Delete Issue
-	</a>
-	";
+	$editButton = $this->template->linkButton(
+		'Edit Issue',
+		BASE_URL."/tickets/updateIssue.php?ticket_id={$this->ticket->getId()};index={$this->index}",
+		'edit',null,null,'button'
+	);
+	$deleteButton = $this->template->linkButton(
+		'Delete Issue',
+		BASE_URL."/tickets/deleteIssue.php?ticket_id={$this->ticket->getId()};index={$this->index}",
+		'delete',null,null,'button'
+	);
 
 	if ($this->issue->getReportedByPerson()) {
-		$responseButton = "
-		<a class=\"add button\"
-			href=\"".BASE_URL."/tickets/addResponse.php?ticket_id={$this->ticket->getId()};index=$this->index\">
-			Add Response
-		</a>
-		";
+		$responseButton = $this->template->linkButton(
+			'Add Response',
+			BASE_URL."/tickets/addResponse.php?ticket_id={$this->ticket->getId()};index=$this->index",
+			'add',null,null,'button'
+		);
 	}
 }
 $url = BASE_URL."/tickets/viewIssue.php?ticket_id={$this->ticket->getId()};index={$this->index}";
@@ -68,7 +65,6 @@ echo "
 
 		$contactMethod = View::escape($this->issue->getContactMethod());
 		$responseMethod = View::escape($this->issue->getResponseMethod());
-		$labels = View::escape(implode(', ',$this->issue->getLabels()));
 		echo "
 		<table>
 			<thead>
@@ -76,7 +72,6 @@ echo "
 					<th>Reported By</th>
 					<th>Contacted Via</th>
 					<th>Respond Via</th>
-					<th>Labels</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -84,7 +79,6 @@ echo "
 					<td>$reportedBy</td>
 					<td>$contactMethod</td>
 					<td>$responseMethod</td>
-					<td>$labels</td>
 				</tr>
 			</tbody>
 		</table>

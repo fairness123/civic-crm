@@ -10,7 +10,7 @@
 	<tr><td><label for="issue[type]" class="required">Type</label></td>
 		<td><select name="issue[type]" id="issue-type">
 				<?php
-					foreach (Lookups::get('types') as $type) {
+					foreach (Issue::$types as $type) {
 						$selected = ($this->issue->getType()==$type)
 							? 'selected="selected"'
 							: '';
@@ -38,7 +38,9 @@
 				echo $name;
 				$return_url = new URL($_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
 				$url = BASE_URL.'/people?return_url='.urlencode($return_url);
-				echo "<a class=\"change button\" href=\"$url\">Change Person</a>";
+				echo $this->template->linkButton(
+					'Change Person',$url,'change',null,null,'button'
+				);
 			?>
 		</td>
 	</tr>
@@ -47,7 +49,7 @@
 		<td><select name="issue[contactMethod]" id="issue-contactMethod">
 				<option></option>
 				<?php
-					foreach (Lookups::get('contactMethods') as $method) {
+					foreach (Issue::$contactMethods as $method) {
 						$selected = $this->issue->getContactMethod()==$method
 							? 'selected="selected"'
 							: '';
@@ -63,7 +65,7 @@
 				<option value="">Do not contact</option>
 				<?php
 					// Use the same drop down as the contact method
-					foreach (Lookups::get('contactMethods') as $method) {
+					foreach (Issue::$contactMethods as $method) {
 						$selected = $this->issue->getContactMethod()==$method
 							? 'selected="selected"'
 							: '';
@@ -73,28 +75,9 @@
 			</select>
 		</td>
 	</tr>
-
-	<tr><td><label>Labels</label></td>
-		<td>
-		<?php
-			foreach (Lookups::get('labels') as $label) {
-				$checked = $this->issue->hasLabel($label)
-					? 'checked="checked"'
-					: '';
-				echo "
-				<label>
-					<input type=\"checkbox\" name=\"issue[labels][]\" value=\"$label\" $checked />
-					$label
-				</label>
-				";
-			}
-		?>
-		</td>
-	</tr>
 </table>
 
 <div><label for="issue-description">Describe the issue</label></div>
 <div>
 	<textarea name="issue[description]" id="issue-description" rows="3" cols="60"><?php echo View::escape($this->issue->getDescription()); ?></textarea>
 </div>
-

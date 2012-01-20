@@ -28,7 +28,9 @@ $this->template->addToAsset('scripts',BASE_URL.'/js/tickets/chooseDepartment.js'
 							?>
 						</select>
 					</td>
-					<td><button type="submit" class="submit">Switch Department</button></td>
+					<td>
+					<?php echo $this->template->formButton('Switch Department','submit','submit');	?>
+					</td>
 				</tr>
 			</table>
 			<?php

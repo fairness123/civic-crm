@@ -502,10 +502,7 @@ class Ticket extends MongoRecord
 	 */
 	public function setClient_id($id)
 	{
-		if (preg_match('/[0-9a-f]{24}/',$id)) {
-			$id = new MongoId($id);
-			$this->data['client_id'] = $id;
-		}
+		$this->data['client_id'] = trim($id);
 	}
 
 	/**

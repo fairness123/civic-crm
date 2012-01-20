@@ -63,10 +63,11 @@ echo "<h1>$title</h1>";
 				</td>
 			</tr>
 		</table>
-		<button type="submit" class="submit">Submit</button>
-		<button type="button" class="cancel"
-			onclick="document.location.href='<?php echo BASE_URL; ?>/users';">
-			Cancel
-		</button>
+		<?php
+			echo $this->formButton('Submit','submit','submit');
+			echo $this->formButton(
+				'Cancel','button','cancel',null,"document.location.href='".BASE_URL."/users';"
+			);
+		?>
 	</fieldset>
 </form>

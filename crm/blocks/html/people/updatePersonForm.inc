@@ -70,10 +70,11 @@ echo "<h1>$title</h1>";
 
 	<fieldset><legend>Submit</legend>
 		<input name="return_url" type="hidden" value="<?php echo View::escape($this->return_url); ?>" />
-		<button type="submit" class="submit">Submit</button>
-		<button type="button" class="cancel"
-			onclick="document.location.href='<?php echo $this->return_url; ?>';">
-			Cancel
-		</button>
+		<?php
+			echo $this->formButton('Submit','submit','submit');
+			echo $this->formButton(
+				'Cancel','button','cancel',null,"document.location.href='{$this->return_url}';"
+			);
+		?>
 	</fieldset>
 </form>

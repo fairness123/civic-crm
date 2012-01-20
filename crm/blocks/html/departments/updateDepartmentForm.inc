@@ -106,11 +106,12 @@ $title = $this->department->getId() ? 'Edit' : 'Add';
 	</fieldset>
 	<fieldset>
 		<input name="return_url" type="hidden" value="<?php echo $return_url; ?>" />
-		<button type="submit" class="submit">Submit</button>
-		<button type="button" class="cancel"
-			onclick="document.location.href='<?php echo $return_url; ?>';">
-			Cancel
-		</button>
+		<?php
+			echo $this->template->formButton('Submit','submit','submit');
+			echo $this->template->formButton(
+				'Cancel','button','cancel',null,"document.location.href='$return_url';"
+			);
+		?>
 	</fieldset>
 </form>
 </div>

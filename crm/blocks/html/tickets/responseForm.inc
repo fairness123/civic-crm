@@ -17,7 +17,7 @@
 				<tr><td><label for="contactMethod">Contact Method</label></td>
 					<td><select name="contactMethod" id="contactMethod">
 							<?php
-								foreach (Lookups::get('contactMethods') as $method) {
+								foreach (Issue::$contactMethods as $method) {
 									$method = View::escape($method);
 									echo "<option>$method</option>";
 								}
@@ -28,11 +28,12 @@
 			</table>
 			<div><label for="notes">Notes</label></div>
 			<div><textarea name="notes" id="notes" rows="3" cols="60"></textarea></div>
-			<button type="submit" class="submit">Submit</button>
-			<button type="button" class="cancel"
-				onclick="document.location.href='<?php echo $this->ticket->getURL(); ?>';">
-				Cancel
-			</button>
+			<?php
+				echo $this->template->formButton('Submit','submit','submit');
+				echo $this->template->formButton(
+					'Cancel','button','cancel',null,"document.location.href='{$this->ticket->getURL()}';"
+				);
+			?>
 		</fieldset>
 	</form>
 </div>

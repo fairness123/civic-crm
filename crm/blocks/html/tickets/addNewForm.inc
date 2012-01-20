@@ -32,8 +32,10 @@ $title = $this->title ? View::escape($this->title) : 'New Cases';
 						echo "<input type=\"hidden\" name=\"$key\" value=\"$value\" />";
 					}
 				}
+				echo $this->template->formButton(
+					'Add New Case','submit','add'
+				);
 			?>
-			<button type="submit" class="add">Add New Case</button>
 		</fieldset>
 	</form>
 </div>

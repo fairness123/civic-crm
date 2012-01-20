@@ -73,7 +73,9 @@ if ($this->limit) {
 								// Just ignore invalid people
 							}
 						}
-						echo "<a class=\"add button\" href=\"$url\">Add Issue</a>";
+						echo $this->template->linkButton(
+							'Add Issue',$url,'add',null,null,'button'
+						);
 					}
 				echo "
 					</td>
@@ -97,7 +99,11 @@ if ($this->limit) {
 					<div>
 						<span class=\"yui3-dd-drop\"><input name=\"ticket_id_a\" id=\"ticket_id_a\" /></span>
 						<span class=\"yui3-dd-drop\"><input name=\"ticket_id_b\" id=\"ticket_id_b\" /><span class=\"yui3-dd-drop\">
-						<button type=\"submit\" class=\"submit\">Submit</button>
+			";
+							echo $this->template->formButton(
+								'Submit','submit','submit'
+							);
+			echo "
 					</div>
 				</fieldset>
 			</form>

@@ -9,7 +9,9 @@
 <div class="interfaceBox">
 	<h1><?php
 			if (userIsAllowed('Users')) {
-				echo '<a class="add button" href="'.BASE_URL.'/users/updateUser.php">Add User Account</a>';
+				echo $this->linkButton(
+					'Add User Account',BASE_URL.'/users/updateUser.php','add'
+				);
 			}
 		?>
 		User Accounts
@@ -31,18 +33,17 @@
 				$editButton = '';
 				$deleteButton = '';
 				if (userIsAllowed('Users')) {
-					$editButton = "
-					<a class=\"edit button\"
-						href=\"".BASE_URL."/users/updateUser.php?person_id={$user->getId()}\">
-						Edit User Account
-					</a>
-					";
-					$deleteButton = "
-					<a class=\"delete button\"
-						href=\"".BASE_URL."/users/deleteUser.php?person_id={$user->getId()}\">
-						Delete User Account
-					</a>
-					";
+					$editButton = $this->linkButton(
+						'Edit User Account',
+						BASE_URL.'/users/updateUser.php?person_id='.$user->getId(),
+						'edit'
+					);
+
+					$deleteButton = $this->linkButton(
+						'Delete User Account',
+						BASE_URL.'/users/deleteUser.php?person_id='.$user->getId(),
+						'delete'
+					);
 				}
 
 				$username = View::escape($user->getUsername());
