@@ -47,7 +47,6 @@ button, .button {
 .actionForm fieldset { float:left; display:table; }
 .actionForm .buttons { clear:left; }
 
-.ticketInfo li { width:280px; }
 .ticketInfo ul .button {
 	/* Hide the text.  Only show the icon */
 	display:inline-block; text-indent:-999px; overflow:hidden; /* Get rid of the text */
@@ -97,7 +96,13 @@ button, .button {
  *Two Column List
  */
 
-.twoColumnlist { -webkit-column-count:2; -moz-column-count:2; column-count:2; }
+.twoColumnlist {
+	
+	column-count:2;
+	-moz-column-count:2;
+	-webkit-column-count:2;
+
+}
 
 /**
  * Interface Boxes
